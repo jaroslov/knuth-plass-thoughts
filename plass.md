@@ -1,3 +1,12 @@
+Errata
+------
+
+Please see:
+
+    https://bugzilla.mozilla.org/show_bug.cgi?id=630181#c8
+
+A copy of this comment is placed at the end of this discussion.
+
 Introduction
 ------------
 
@@ -213,17 +222,35 @@ The second tweak is to keep track, globally, of the best score found so far. Com
 The last change we consider is to add per-line widths. This is done by passing in an array of ideal- and max- line widths into the PlassBreak algorithm, rather than just an ideal- and max- line value.
 
 
+https://bugzilla.mozilla.org/show_bug.cgi?id=630181#c8
+------------------------------------------------------
 
+callcc 2012-02-11 03:10:59 PST
+The algorithm can be implemented to run in O(n) time[2,3]. In fact, even the dynamic programming solution will run in O(min(w * n, n^2)) time[5], where w is the maximum number of words on a line. Since w is fixed, the algorithm is linear for large n.
 
+For a true linear time algorithm you have to make some assumptions on the cost function (namely, concavity). This is usually not a problem, but I think that it may be incompatible with varying line widths. There is yet another way to implement the algorithm which runs in O(n log n) time[1], but apparently with smaller constants than the O(n) algorithm[2].
 
+Now, while I don't know the complexities of the CSS float model, I would really appreciate to have some way to render aesthetically pleasing text in a browser. It does not have to support all the bells and whistles of normal HTML text - even a simple text field would be nice.
 
+Paragraph formatting is pretty much a solved problem in academia and I'm posting this to point you or potential implementors at the relevant literature. However, in my opinion, implementing the dynamic programming algorithm with max line cutoff is both easy and fast enough.
 
+References:
 
+The first line of research is into the "least weight subsequence problem", of which Knuth-Plass paragraph formation is a special case. All papers assume that the cost function is concave.
 
+[1] D.S. Hirschberg and L.L. Larmore, The Least Weight Subsequence Problem
+(This contains both an O(n log n) time algorithm and an O(n) algorithm with additional assumptions.)
 
+[2] Robert Wilber. 1988. The concave least-weight subsequence problem revisited
+(The first O(n) algorithm which works with any concave cost function.)
 
+[3] Z. Galil and K. Park. 1990. A linear-time algorithm for concave one-dimensional dynamic programming
+(A simplified O(n) algorithm.)
 
+Both [2] and [3] depend on an algorithm for "monotone matrix search", which is described in:
 
+[4] A Aggarwal, M Klawe, S Moran, P Shor, and R Wilber. 1986. Geometric applications of a matrix searching algorithm
 
+Finally, for the cost function used by TeX you will have to consult the relevant chapter in Knuth's "Digital Typography" book. Additionally, there is a paper/literate program which implements an O(n) time algorithm:
 
-
+[5] Oege de Moor and Jeremy Gibbons. 1997. Bridging the Algorithm Gap: a Linear-Time Functional Program for Paragraph Formatting
