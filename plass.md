@@ -18,7 +18,7 @@ Line-breaking algorithms take a paragraph's-worth of words, and split the words 
 Most programmer's "know" the following three facts:
 
 1. Knuth-Plass produces the 'best' line breaks;
-2. Knuth-Plass is a quadratic algorihtm; and,
+2. Knuth-Plass is a quadratic algorithm; and,
 3. Knuth-Plass uses dynamic programming and is impossible for mere mortals to code.
 
 While we happen to agree with (1), we will demonstrate that (2) and (3) are, respectively, not true, and unnecessarily obscure.
