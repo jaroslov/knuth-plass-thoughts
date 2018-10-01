@@ -15,7 +15,7 @@ Line-breaking algorithms take a paragraph's-worth of words, and split the words 
 1. The greedy algorithm; and,
 2. The Knuth-Plass algorithm (the 'latex one').
 
-Most programmer's "know" the following three facts:
+Most programmers "know" the following three facts:
 
 1. Knuth-Plass produces the 'best' line breaks;
 2. Knuth-Plass is a quadratic algorithm; and,
